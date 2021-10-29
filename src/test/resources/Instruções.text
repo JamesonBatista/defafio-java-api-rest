@@ -1,0 +1,53 @@
+                                            *DESAFIO REST JAVA*
+
+
+        Esse desafio foi criado para desafiar seu conhecimento e te ajudar a melhorar no conhecimento de Rest,
+        e principalmente em JAVA e outras linguagens como Python, JS , Ruby, depois disso, é NASA direto.
+
+
+        Dentro de casa JSON tem o desafio para ele. Leia com atenção.
+
+        Baixe o projeto, abra no intelliJ terá um arquivo chamado instruções.md dentro de src/test/resources
+
+        No projeto dentro de src/main/validate/validacoes.java terá um método de Test para ser usado para criar as validações
+
+        Vamos as instruções:
+
+
+         Você fará um POST usando o Rest e enviando o JSON dessa forma:
+
+        RestAssured.baseURI = "https://reqres.in/api/users/7";
+
+        String nameJSONDesafio = "simple-simple";  // Mude aqui o nome do JSON de acordo com o desafio.
+        String body = new String(Files.readAllBytes(Paths.get("src/test/resources/jsons/" + nameJSONDesafio + ".json")));
+
+        given().contentType(ContentType.JSON)
+                .body(body)
+                .when().post()
+                .then().log().body();  // Aqui você poderá usar o .body() para efetuar as validações.
+
+
+
+         Ordem dos JSONs por complexidade de validação:
+
+         1 - simple-simple -> JSON nível básico
+         2 - simple        -> JSON nível básico 1
+         3 - simple-medium -> JSON nível básico com complexidade nível 1
+         4 - medium        -> JSON nível médico com complexidade básica
+         5 - medium-complex -> JSON nível médio com complexidade média
+         6 - complex        -> JSON nível complexo dificuldade baixa
+         7 - complex-medium -> JSON nível complexo dificuldade média/alta
+         8 - hard-simple    -> JSON nível difícil, dificuldade baixa/média
+         9 - hard-medium    -> JSON nível difícil, dificuldade média/alta
+         10 - hard-complex  -> JSON nível difícil, dificuldade alta
+         11 - hard-hard     -> JSON nível Alto, dificuldade alta/altamente alta
+         12 - master-simple -> JSON nível altíssimo, dificuldade média
+         13 - master-medium -> JSON nível altíssimo, dificuldade média/alta
+         14 - master-complex -> JSON nível Semi-deus, dificuldade Semi-deus.
+         15 - master-master  -> JSON nível GOD, dificuldade Cavaleiros dos Zodíacos
+         16 - ultra          -> JSON nível cereja do bolo, leve e tranquilo.
+
+
+        Você que se sentiu desafiado, tem direito a 3 dicas por JSON que está tentando validar. :)
+
+        Palavra de incentivo: Duvido você conseguir!
