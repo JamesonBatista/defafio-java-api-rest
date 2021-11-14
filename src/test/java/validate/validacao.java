@@ -3,6 +3,7 @@ package validate;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +22,7 @@ public class validacao {
     Para extrair usaremos o JSONObject já incluso em suas dependências.
      */
     JSONObject json;
+    JSONArray jsonArray;
     ValidatableResponse response;
 
     private static String body;
@@ -40,12 +42,44 @@ public class validacao {
     public void validacaoJSON() throws IOException {
         response = given()
                 .contentType(ContentType.JSON)
-                .body(JSON("simple-simple"))
+                .body(JSON("camada-pre-sal"))
                 .when()
                 .post().then();
 
         json = new JSONObject(response.extract().response().asString());
-        System.out.println(json);
 
+        jsonArray = json.getJSONObject("user-info").optJSONArray("address");
+        for (Object x : jsonArray) {
+            json = new JSONObject(x.toString());
+            jsonArray = json.getJSONObject("primary-address").getJSONArray("house");
+
+            for (Object a : jsonArray) {
+                json = new JSONObject(a.toString());
+                jsonArray = json.getJSONObject("room").getJSONArray("bed");
+
+                for (Object b : jsonArray) {
+                    json = new JSONObject(b.toString());
+                    jsonArray = json.getJSONObject("sanders").optJSONArray("airPlane");
+
+                    for (Object c : jsonArray) {
+                        json = new JSONObject(c.toString());
+
+                        if (json.has("Brooks"))
+                            jsonArray = json.getJSONArray("Brooks");
+                        for (Object d : jsonArray) {
+                            json = new JSONObject(d.toString());
+                            if (json.has("books"))
+                                jsonArray = json.getJSONArray("books");
+                            for (Object e : jsonArray) {
+                                json = new JSONObject(e.toString());
+
+                                if (json.has("result-final"))
+                                    System.out.println(json.getJSONObject("result-final").get("value"));
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

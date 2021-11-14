@@ -7,26 +7,15 @@
 
         Dentro de casa JSON tem o desafio para ele. Leia com atenção.
 
-        Baixe o projeto, abra no intelliJ terá um arquivo chamado instruções.md dentro de src/test/resources
+        Baixe o projeto, abra no intelliJ.
+
+        git clone https://github.com/JamesonBatista/defafio-java-api-rest.git
 
         No projeto dentro de src/main/validate/validacoes.java terá um método de Test para ser usado para criar as validações
 
+        Assista o vídeo explicando com um pouco mais de detalhes.
+
         Vamos as instruções:
-
-
-         Você fará um POST usando o Rest e enviando o JSON dessa forma:
-
-        RestAssured.baseURI = "https://reqres.in/api/users/7";
-
-        String nameJSONDesafio = "simple-simple";  // Mude aqui o nome do JSON de acordo com o desafio.
-        String body = new String(Files.readAllBytes(Paths.get("src/test/resources/jsons/" + nameJSONDesafio + ".json")));
-
-        given().contentType(ContentType.JSON)
-                .body(body)
-                .when().post()
-                .then().log().body();  // Aqui você poderá usar o .body() para efetuar as validações.
-
-
 
          Ordem dos JSONs por complexidade de validação:
 
@@ -46,6 +35,8 @@
          14 - master-complex -> JSON nível Semi-deus, dificuldade Semi-deus.
          15 - master-master  -> JSON nível GOD, dificuldade Cavaleiros dos Zodíacos
          16 - ultra          -> JSON nível cereja do bolo, leve e tranquilo.
+         17 - camada-pre-sal -> JSON nível Zeus, validação profunda JAMAIS vista no mercado,
+         mas que dará um conhecimento profundo sobre validação.
 
 
         Você que se sentiu desafiado, tem direito a 3 dicas por JSON que está tentando validar. :)

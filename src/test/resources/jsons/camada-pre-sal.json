@@ -1,0 +1,46 @@
+{
+  "user-info": {
+    "address": [
+      {
+        "primary-address": {
+          "house": [
+            {
+              "room": {
+                "items": {
+                  "item-1": "escova",
+                  "item-2": "creme"
+                },
+                "bed": [
+                  {
+                    "sanders": {
+                      "airPlane": [
+                        {
+                          "id": 123,
+                          "name": "God"
+                        },
+                        {
+                          "Brooks": [
+                            {
+                              "books": [
+                                {
+                                  "result-final": {
+                                    "value": "Parabéns você encontrou o valor final Usando JSONObject"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "desafio": "Encontrar, extrair e imprimir o value final"
+}
