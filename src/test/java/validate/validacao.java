@@ -48,38 +48,5 @@ public class validacao {
 
         json = new JSONObject(response.extract().response().asString());
 
-        jsonArray = json.getJSONObject("user-info").optJSONArray("address");
-        for (Object x : jsonArray) {
-            json = new JSONObject(x.toString());
-            jsonArray = json.getJSONObject("primary-address").getJSONArray("house");
-
-            for (Object a : jsonArray) {
-                json = new JSONObject(a.toString());
-                jsonArray = json.getJSONObject("room").getJSONArray("bed");
-
-                for (Object b : jsonArray) {
-                    json = new JSONObject(b.toString());
-                    jsonArray = json.getJSONObject("sanders").optJSONArray("airPlane");
-
-                    for (Object c : jsonArray) {
-                        json = new JSONObject(c.toString());
-
-                        if (json.has("Brooks"))
-                            jsonArray = json.getJSONArray("Brooks");
-                        for (Object d : jsonArray) {
-                            json = new JSONObject(d.toString());
-                            if (json.has("books"))
-                                jsonArray = json.getJSONArray("books");
-                            for (Object e : jsonArray) {
-                                json = new JSONObject(e.toString());
-
-                                if (json.has("result-final"))
-                                    System.out.println(json.getJSONObject("result-final").get("value"));
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }
