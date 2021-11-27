@@ -23,24 +23,23 @@ public class validacao {
      */
     JSONObject json;
     JSONArray jsonArray;
-   static ValidatableResponse response;
-
+    static ValidatableResponse response;
     private static String body;
 
     @BeforeClass
     public static void initRest() throws IOException {
         RestAssured.baseURI = "https://reqres.in/api/users/7"; // Chamada RestAssured não precisa ser alterada
-        Responses();
     }
+
     // Aqui será onde você irá passar o nome do JSON de sua validação conforme o Test abaixo.
     public static String JSON(String nameJSON) throws IOException {
         return body = new String(Files.readAllBytes(Paths.get("src/test/resources/jsons/" + nameJSON + ".json")));
     }
 
-    public static ValidatableResponse Responses() throws IOException {
+    public static ValidatableResponse Responses(String name) throws IOException {
         return response = given()
                 .contentType(ContentType.JSON)
-                .body(JSON("simple-simple"))
+                .body(JSON(name))
                 .when()
                 .post().then();
     }
@@ -48,6 +47,7 @@ public class validacao {
 
     @Test
     public void validacaoJSON() throws IOException {
+        Responses("simple-simple");
 
         json = new JSONObject(response.extract().response().asString());
         System.out.println(json);
