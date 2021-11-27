@@ -11,7 +11,7 @@
 
         git clone https://github.com/JamesonBatista/defafio-java-api-rest.git
 
-        No projeto dentro de src/main/validate/validacoes.java terá um método de Test para ser usado para criar as validações
+        No projeto dentro de src/main/components/validacoes.java terá um método de Test para ser usado para criar as validações
 
         Assista o vídeo explicando com um pouco mais de detalhes.
 
