@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
 
-public class responseRequisition {
+public class request {
 
 
-    public static ValidatableResponse postReturn(String name) throws IOException {
+    public static ValidatableResponse postRequest(String name) throws IOException {
         RestAssured.baseURI = "https://reqres.in/api/users/7"; // Chamada RestAssured não precisa ser alterada
         return  given()
                 .contentType(ContentType.JSON)
