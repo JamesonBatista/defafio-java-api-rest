@@ -8,11 +8,11 @@ import java.io.IOException;
 
 import static component.request.postRequest;
 
-public class TestValidations {
+public class Tests {
     private String response;
     private JSONObject json;
 
-    @Test
+    @org.junit.Test
     public void simpleSimple() throws IOException {
         response = postRequest("simple-simple");
         json = new JSONObject(response);
