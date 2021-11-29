@@ -1,6 +1,5 @@
 package validations;
 
-import io.restassured.response.ValidatableResponse;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ public class Tests {
     private String response;
     private JSONObject json;
 
-    @org.junit.Test
+    @Test
     public void simpleSimple() throws IOException {
         response = postRequest("simple-simple");
         json = new JSONObject(response);
