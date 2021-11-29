@@ -13,12 +13,12 @@ import static io.restassured.RestAssured.given;
 public class request {
 
 
-    public static ValidatableResponse postRequest(String name) throws IOException {
+    public static String postRequest(String name) throws IOException {
         RestAssured.baseURI = "https://reqres.in/api/users/7"; // Chamada RestAssured não precisa ser alterada
         return  given()
                 .contentType(ContentType.JSON)
                 .body(new String(Files.readAllBytes(Paths.get("src/test/resources/jsons/" + name + ".json"))))
                 .when()
-                .post().then();
+                .post().then().extract().asString();
     }
 }
