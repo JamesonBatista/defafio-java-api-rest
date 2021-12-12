@@ -1,5 +1,6 @@
 package validations;
 
+import io.cucumber.messages.JSON;
 import io.restassured.response.ValidatableResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +28,5 @@ public class Tests {
 //        System.out.println(city);
 
     }
-
 
 }

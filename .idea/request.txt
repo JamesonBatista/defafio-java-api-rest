@@ -5,17 +5,19 @@ Simple-simple
 
         **********************************************************************
 simple
-
-  List<Object> orderList = response.jsonPath().getList("user.Order");
+  ValidatableResponse request;
+        request = postRequest("simple");
+  List<Object> orderList = request.jsonPath().getList("user.Order");
         List<Object> order = orderList.stream().sorted().collect(Collectors.toList());
         order.forEach(System.out::println);
 
         **********************************************************************
 simple-medium
-
+  ValidatableResponse request;
+        request = postRequest("simple-medium");
 
         JSONObject json;
-        List<Object> list = response.jsonPath().getList("$");
+        List<Object> list = request.jsonPath().getList("$");
         JSONArray jsonArray = new JSONArray(list);
 
         for (Object item : jsonArray) {
@@ -28,8 +30,8 @@ medium
  public void medium() throws IOException {
         JSONArray jsonArray;
         Integer quantifyUsers;
-        response = postRequest("medium");
-        json = new JSONObject(response);
+         ValidatableResponse request = postRequest("medium");
+        json = new JSONObject(request.extract().asString());
         jsonArray = json.optJSONArray("users");
         quantifyUsers = json.optJSONArray("users").length();
         System.out.println("Quantidade de usuários: " + quantifyUsers);
@@ -66,7 +68,10 @@ medium
         **********************************************************************
 medium-complex
 
-        List<Object> validation = response.jsonPath().getList("$");
+  ValidatableResponse request;
+        request = postRequest("camada-array-guerra-divina");
+
+        List<Object> validation = request.jsonPath().getList("$");
         JSONObject json;
         JSONArray jsonArray = new JSONArray(validation);
 
@@ -85,11 +90,14 @@ medium-complex
         **********************************************************************
 complex
 
-           List<Object> usersList = response.jsonPath().getList("users");
+  ValidatableResponse request;
+        request = postRequest("complex");
+
+           List<Object> usersList = request.jsonPath().getList("users");
             JSONArray arrayUsers = new JSONArray(usersList);
             JSONObject usersJson;
 
-            List<Object> carList = response.jsonPath().getList("products");
+            List<Object> carList = request.jsonPath().getList("products");
             JSONArray arrayCar = new JSONArray(carList);
             JSONObject carJson;
 
@@ -106,7 +114,10 @@ complex
         **********************************************************************
 complex-medium
 
-               List<Object> listGeneral = response.jsonPath().getList("$");
+  ValidatableResponse request;
+        request = postRequest("complex-medium");
+
+               List<Object> listGeneral = request.jsonPath().getList("$");
                JSONObject jsonUsers;
                JSONObject jsonCars;
 
@@ -133,12 +144,13 @@ complex-medium
         **********************************************************************
 hard-simple
 
-
-        List<Object> usersList = response.jsonPath().getList("users");
+  ValidatableResponse request;
+        request = postRequest("hard-simple");
+        List<Object> usersList = request.jsonPath().getList("users");
         JSONArray arrayUsers = new JSONArray(usersList);
         JSONObject jsonUsers;
 
-        List<Object> carList = response.jsonPath().getList("products");
+        List<Object> carList = request.jsonPath().getList("products");
         JSONArray arrayCar = new JSONArray(carList);
         JSONObject jsonCar;
 
@@ -158,9 +170,10 @@ hard-simple
 
         **********************************************************************
 hard-medium
+  ValidatableResponse request;
+        request = postRequest("hard-medium");
 
-
-        List<Object> ListGeneral = response.jsonPath().getList("$");
+        List<Object> ListGeneral = request.jsonPath().getList("$");
         JSONArray arrayListGeneral = new JSONArray(ListGeneral);
         JSONArray usersArray;
         JSONArray carArray;
@@ -190,13 +203,14 @@ hard-medium
         **********************************************************************
 hard-complex
 
+  ValidatableResponse request;
+        request = postRequest("hard-complex");
 
-
-        List<Object> usersList = response.jsonPath().getList("users");
+        List<Object> usersList = request.jsonPath().getList("users");
         JSONArray arrayUsers = new JSONArray(usersList);
         JSONObject jsonUsers;
 
-        List<Object> carList = response.jsonPath().getList("products");
+        List<Object> carList = request.jsonPath().getList("products");
         JSONArray arrayCar = new JSONArray(carList);
         JSONObject jsonCar;
 
@@ -219,7 +233,10 @@ hard-complex
         **********************************************************************
 hard-hard
 
-     List<Object> ListGeneral = response.jsonPath().getList("$");
+  ValidatableResponse request;
+        request = postRequest("hard-hard");
+
+     List<Object> ListGeneral = request.jsonPath().getList("$");
         JSONArray arrayListGeneral = new JSONArray(ListGeneral);
         JSONArray usersArray;
         JSONArray carArray;
@@ -252,16 +269,18 @@ hard-hard
 
         **********************************************************************
 master-simple
+  ValidatableResponse request;
+        request = postRequest("master-simple");
 
-        List<Object> usersList = response.jsonPath().getList("users");
+        List<Object> usersList = request.jsonPath().getList("users");
         JSONArray arrayUsers = new JSONArray(usersList);
         JSONObject jsonUsers;
 
-        List<Object> carList = response.jsonPath().getList("products");
+        List<Object> carList = request.jsonPath().getList("products");
         JSONArray arrayCar = new JSONArray(carList);
         JSONObject jsonCar;
 
-        List<Object> vipsList = response.jsonPath().getList("VIPs");
+        List<Object> vipsList = request.jsonPath().getList("VIPs");
         JSONArray arrayVip = new JSONArray(vipsList);
         JSONObject jsonVip;
 
@@ -292,7 +311,10 @@ master-simple
         **********************************************************************
 master-medium
 
-       List<Object> ListGeneral = response.jsonPath().getList("$");
+  ValidatableResponse request;
+        request = postRequest("master-medium");
+
+       List<Object> ListGeneral = request.jsonPath().getList("$");
         JSONArray arrayListGeneral = new JSONArray(ListGeneral);
         JSONArray usersArray;
         JSONArray carArray;
@@ -337,9 +359,41 @@ master-medium
         }
 
         **********************************************************************
-master-master
+        master-complex
 
-        List<Object> ListGeneral = response.jsonPath().getList("$");
+            public void master_complex() throws IOException {
+                response = postRequest("master-complex").extract().asString();
+                json = new JSONObject(response);
+
+                JSONArray arrayUsers = json.getJSONArray("users");
+                JSONArray arrayProducts = json.getJSONArray("products");
+
+                for (Object listUsers : arrayUsers) {
+                    JSONObject usersList = new JSONObject(listUsers.toString());
+                    String splitUsers = usersList.get("name").toString();
+                    if (splitUsers.split(" ")[1].equals("VIP")) {
+
+                        for (Object listProducts : arrayProducts) {
+                            JSONObject productsList = new JSONObject(listProducts.toString());
+
+                            if (productsList.has("VIPs")) {
+                                for (Object listVips : productsList.getJSONArray("VIPs")) {
+                                    JSONObject listProductsVips = new JSONObject(listVips.toString());
+                                    System.out.println("Olá eu sou " + splitUsers.split(" ")[0]
+                                            + " tenho " + usersList.get("money") + " e posso comprar um " + listProductsVips.get("car"));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        **********************************************************************
+master-master
+  ValidatableResponse request;
+        request = postRequest("master-master");
+        List<Object> ListGeneral = request.jsonPath().getList("$");
         JSONArray arrayListGeneral = new JSONArray(ListGeneral);
         JSONArray usersArray;
         JSONArray carArray;
@@ -439,13 +493,10 @@ ultra
 camada-pre-sal
 
 
-   response = given()
-                .contentType(ContentType.JSON)
-                .body(JSON("camada-pre-sal"))
-                .when()
-                .post().then();
+  ValidatableResponse request;
+        request = postRequest("camada-array-guerra-divina");
 
-        json = new JSONObject(response.extract().response().asString());
+        json = new JSONObject(request.extract().response().asString());
 
         jsonArray = json.getJSONObject("user-info").optJSONArray("address");
         for (Object x : jsonArray) {
@@ -484,5 +535,93 @@ camada-pre-sal
 
 
          *********************************************************************
+         // faltando validar quarta camada em diante...
+public void camada_array_guerra_divina() throws IOException {
+        ValidatableResponse request;
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        request = postRequest("camada-array-guerra-divina");
+        List<Object> ListGeneral = request.extract().jsonPath().getList("$");
+        JSONArray arrayListGeneral = new JSONArray(ListGeneral);
+
+        for (Object list : arrayListGeneral) {
+            jsonObject = new JSONObject(list.toString());
+
+            if (jsonObject.has("users")) {
+                jsonArray = jsonObject.getJSONArray("users");
+
+                for (Object listUsers : jsonArray) {
+                    jsonObject = new JSONObject(listUsers.toString());
+                    jsonArray = jsonObject.getJSONArray("main");
+
+                    for (Object listMain : jsonArray) {
+                        jsonObject = new JSONObject(listMain.toString());
+                        jsonArray = jsonObject.getJSONArray("intro");
+
+                        for (Object listMainIntro : jsonArray) {
+                            jsonObject = new JSONObject(listMainIntro.toString());
+                            if (jsonObject.has("description")) {
+                                Assert.assertEquals(jsonObject.get("description"), "Impossível de validar");
+                                Assert.assertEquals(jsonObject.get("title"), "desafio");
+                            } else if (jsonObject.has("primeira-camada")) {
+                                JSONObject listPrimeiraCamada = new JSONObject(jsonObject.toString());
+                                JSONArray arrayListPrimeira = listPrimeiraCamada.getJSONArray("primeira-camada");
+
+                                for (Object listSegunda : arrayListPrimeira) {
+                                    JSONObject segundaCamada = new JSONObject(listSegunda.toString());
+                                    JSONArray arraySegunda = segundaCamada.getJSONArray("segunda-camada");
+
+                                    for (Object listObjectSegunda : arraySegunda) {
+                                        JSONObject listSegundaCamada = new JSONObject(listObjectSegunda.toString());
+                                        if (listSegundaCamada.has("title-segunda-camada")) {
+                                            Assert.assertEquals(listSegundaCamada.get("title-segunda-camada"), "difícil chegar aqui");
+                                        } else if (listSegundaCamada.has("terceira-camada")) {
+                                            JSONObject terceiraCamada = new JSONObject(listSegundaCamada.toString());
+                                            JSONArray arrayTerceiraCamada = terceiraCamada.getJSONArray("terceira-camada");
+
+                                            for (Object listTerceiraCamada : arrayTerceiraCamada) {
+                                                JSONObject listObjectTerceiraCamada = new JSONObject(listTerceiraCamada.toString());
+                                                if (listObjectTerceiraCamada.has("title-terceira-camada")) {
+                                                    System.out.println(listObjectTerceiraCamada.get("title-terceira-camada"));
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+         *********************************************************************
+         // falta imprimir o desafio
+         public void acesso_empresarial() throws IOException {
+         //        Meu nome é xxxx trabalho na xxxx meu código de acesso é xxxx
+                 response = postRequest("acesso-empresarial").extract().asString();
+                 json = new JSONObject(response);
+                 JSONArray listFuncionarios = json.getJSONArray("users-funcionarios");
+
+                 for (Object listUsers : listFuncionarios) {
+                     json = new JSONObject(listUsers.toString());
+
+                     if (json.get("enterprise").equals("Tesla")) {
+                         JSONObject listEnterprises = new JSONObject(response);
+                         JSONArray listEnterprise = listEnterprises.getJSONArray("enterprises");
+
+                         for (Object listObjectEnterprises : listEnterprise) {
+                             JSONObject listEnterprisesObject = new JSONObject(listObjectEnterprises.toString());
+                             if (listEnterprisesObject.get("social").equals("Tesla")) {
+                                 System.out.println(listEnterprisesObject.getJSONObject("access_key").getJSONObject("authorization"));
+
+                             }
+                         }
+                     }
+                 }
+             }
 
          *********************************************************************
